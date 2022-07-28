@@ -6,13 +6,11 @@ from github import Github
 
 """global vars"""
 username = "musaubrian"
-base_url = "https://api.github.com/user/repos"
-
 with open("./token", "r") as file:
     token = file.read()
-
-g = Github(token)
+base_url = "https://api.github.com/user/repos"
 auth_headers = {"Authorization": f"token {token}"}
+g = Github(token)
 
 
 def create_repo():
