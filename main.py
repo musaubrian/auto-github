@@ -5,9 +5,10 @@ import json
 from github import Github
 
 """global vars"""
-username = "musaubrian"
 with open("./token", "r") as file:
     token = file.read()
+    
+username = "musaubrian"
 base_url = "https://api.github.com/user/repos"
 auth_headers = {"Authorization": f"token {token}"}
 g = Github(token)
