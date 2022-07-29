@@ -54,7 +54,11 @@ def issue_tracker(issue_status):
         closed - closed issues
         all - displays all issues
     """
-    print(f"You passed -i with: {issue_status}")
+    repo_name = input("Enter repo name: ")
+    auth_repo = g.get_user(username).get_repo(repo_name)
+    issues = auth_repo.get_issues(state=issue_status)
+    for issue in issues:
+        print(issue)
 
 
 def list_repos():
@@ -83,13 +87,13 @@ def handle_args():
             "-i", "--issue",
             type=str,
             help="""
-            get issues using issue status [o - open | c - closed | a - all] 
+            get issues using issue status [open | closed | all] 
             """
             )
 
     args = parser.parse_args()
     
-    issue_options = ["o", "c", "a"]
+    issue_options = ["open", "closed", "all"]
     status = args.issue
     repo = args.repo
 
