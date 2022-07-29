@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """script uses github's api to create repos from terminal"""
+
 from github import Github
 import requests
 import json
 import argparse
 import subprocess
+import os
 
 
 """global vars"""
@@ -44,20 +46,24 @@ def create_repo(repo_name, url, headers, github_username):
     repo.create_file(
             "README.md", "add readme", f"# {repo_name}\n> {repo_desc}"
             )
-    print(f"==========successfully created {repo_name}==========")
+    print(f"==========successfully created {repo_name}==========\n")
 
 
 def list_issues(issue_status):
     """
     displays issues in select repo
-    status:
+    
+    args::
+
+    issuse_status:
         open - open issues
         closed - closed issues
         all - displays all issues
     """
-    repo_name = input("Repo to search: ")
-    auth_repo = g.get_user(username).get_repo(repo_name)
-    issues_list = auth_repo.get_issues(state=issue_status)
+    repo_name = input("Repo to search issues: ")
+    repo_func = g.get_user(username).get_repo(repo_name)
+    issues_list = repo_func.get_issues(state=issue_status)
+    print()
     if issues_list is None:
         print(f"No issues found")
     else:
@@ -67,8 +73,18 @@ def list_issues(issue_status):
 
 
 def clone_repo(repo):
-    """clones the created repo locally"""
-    subprocess.run(["git","clone", f"https://{token}@github.com/{username}/{repo}"])
+    """
+    clones the created repo locally
+
+    args::
+    repo - name of the repo
+    """
+    
+    os.chdir("..")
+    subprocess.run(
+            ["git","clone",f"https://{token}@github.com/{username}/{repo}"]
+            )
+    print("\n==========Process complete==========")
 
 def handle_args():
     """hadle arguments passed"""
