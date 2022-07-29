@@ -46,7 +46,7 @@ def create_repo(repo_name, url, headers, github_username):
     print(f"==========successfully created {repo_name}==========")
 
 
-def issue_tracker(issue_status):
+def list_issues(issue_status):
     """
     displays issues in select repo
     status:
@@ -54,16 +54,15 @@ def issue_tracker(issue_status):
         closed - closed issues
         all - displays all issues
     """
-    repo_name = input("Enter repo name: ")
+    repo_name = input("Repo to search: ")
     auth_repo = g.get_user(username).get_repo(repo_name)
-    issues = auth_repo.get_issues(state=issue_status)
-    for issue in issues:
-        print(issue)
+    issues_list = auth_repo.get_issues(state=issue_status)
+    if issues_list is None:
+        print(f"No issues found")
+    else:
+        for issue in issues_list:
+            print(issue)
 
-
-def list_repos():
-    """lists all repos"""
-    pass
 
 
 def clone_repo():
@@ -101,8 +100,8 @@ def handle_args():
         if status is None:
             raise parser.error(message="You need to parse arguments")
         elif status in issue_options:
-            print(f"issues: {status}")
-            issue_tracker(issue_status=status)
+            print(f"issues status: {status}")
+            list_issues(issue_status=status)
         elif status not in issue_options:
             print(f"arg [{status}] is not a valid argument\n",
                     f"\nallowed args: [{issue_options}]")
