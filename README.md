@@ -4,7 +4,7 @@
 Creates a basic repo with a README and an empty gitignore and clones the repo **all in just one line**
 ## Installation && setup
 
-Clone the repository
+Clone the repository and install requirements
 
 ```sh
 git clone https://github.com/musaubrian/auto-github
@@ -15,13 +15,10 @@ pip install -r requirements.txt
 ```
 
 ### setup
-create file `token`
-format
+create file `token` with the format:
 
-```txt
-github_username
-github_token
-```
+![token-format](https://user-images.githubusercontent.com/94367979/181854680-6593e3d1-e581-4e20-bd74-f5045910a226.png)
+
     
 ## Usage && Examples
 
@@ -39,6 +36,8 @@ optional arguments:
                         get issues using issue status [open |
                         closed | all]
 ```
+### Example
+
 **Repositroy arg (-r | --repo)**
 ```sh
 $ python3 main.py -r repository_name
