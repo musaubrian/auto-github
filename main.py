@@ -45,7 +45,7 @@ def create_repo(repo_name, url, headers, github_username):
     repo.create_file(
             "README.md", "add readme", f"# {repo_name}\n> {repo_desc}"
             )
-    print(f"==========successfully created {repo_name}==========\n")
+    print(f"========== successfully created {repo_name} ==========\n")
 
 
 def list_issues(issue_status):
@@ -80,7 +80,7 @@ def clone_repo(repo):
     subprocess.run(
             ["git", "clone", f"https://{token}@github.com/{username}/{repo}"]
             )
-    print("\n==========Process complete==========")
+    print("\n========== Process complete ==========")
 
 
 def handle_args():
