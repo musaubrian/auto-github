@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""script uses github's api to create repo's from terminal"""
+"""script uses github's api to create repos from terminal"""
 import requests
 import json
 from github import Github
@@ -41,6 +41,7 @@ def create_repo(url, headers, github_username):
     repo.create_file(
             "README.md", "add readme", f"# {repo_name}\n> {repo_desc}"
             )
+    print(f"==========successfully created {repo_name}==========")
 
 
 def issue_tracker():
@@ -59,8 +60,14 @@ def list_repos():
     pass
 
 
+def clone_repo():
+    """clones the created repo locally"""
+    pass
+
+
 def handle_args():
     """hadle arguments passed"""
+    pass
 
 
 if __name__ == "__main__":
