@@ -1,7 +1,7 @@
 # auto-github
 
 
-Creates a basic repo with a README and an empty gitignore and clones the repo **all in just one line**
+Creates a basic repo with a README and an empty gitignore and clones the repo **all in just two lines** or **one** if you'd like
 ## Installation && setup
 
 Clone the repository and install requirements
