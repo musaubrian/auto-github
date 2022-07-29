@@ -4,6 +4,7 @@ from github import Github
 import requests
 import json
 import argparse
+import subprocess
 
 
 """global vars"""
@@ -65,10 +66,9 @@ def list_issues(issue_status):
 
 
 
-def clone_repo():
+def clone_repo(repo):
     """clones the created repo locally"""
-    pass
-
+    subprocess.run(["git","clone", f"https://{token}@github.com/{username}/{repo}"])
 
 def handle_args():
     """hadle arguments passed"""
@@ -112,7 +112,7 @@ def handle_args():
                 headers=auth_headers,
                 github_username=username
                 )
-
+        clone_repo(repo=repo)
 
 if __name__ == "__main__":
     handle_args()
