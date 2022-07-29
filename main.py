@@ -7,25 +7,34 @@ from github import Github
 """global vars"""
 with open("./token", "r") as file:
     token = file.read()
-    
+
 username = "musaubrian"
 base_url = "https://api.github.com/user/repos"
 auth_headers = {"Authorization": f"token {token}"}
 g = Github(token)
 
 
-def create_repo():
-    """creates a repo with description"""
+def create_repo(url, headers, github_username):
+    """
+    creates a repo with description
+    adds README and gitignore
+
+    Args::
+
+    url - the base url
+    headers - authentication headers
+    github_username - github username
+    """
     repo_name = input("Enter repo name: ")
     repo_desc = input("Add repo description: ")
     repo_info = {"name": repo_name, "description": repo_desc}
     response = requests.post(
-            base_url,
-            headers=auth_headers,
+            url,
+            headers=headers,
             data=json.dumps(repo_info)
             )
     print(response)
-    repo = g.get_user(username).get_repo(name=repo_name)
+    repo = g.get_user(github_username).get_repo(name=repo_name)
     repo.create_file(
             ".gitignore", "add gitignore", ""
             )
@@ -33,5 +42,26 @@ def create_repo():
             "README.md", "add readme", f"# {repo_name}\n> {repo_desc}"
             )
 
+
+def issue_tracker():
+    """
+    displays issues in select repo
+    status:
+        open - open issues
+        closed - closed issues
+        all - displays all issues
+    """
+    pass
+
+
+def list_repos():
+    """lists all repos"""
+    pass
+
+
+def handle_args():
+    """hadle arguments passed"""
+
+
 if __name__ == "__main__":
-    create_repo()
+    create_repo(url=base_url, headers=auth_headers, github_username=username)
