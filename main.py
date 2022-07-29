@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """script uses github's api to create repos from terminal"""
+from github import Github
 import requests
 import json
-from github import Github
+import argparse
+
 
 """global vars"""
 with open("./token", "r") as file:
@@ -14,17 +16,18 @@ auth_headers = {"Authorization": f"token {token}"}
 g = Github(token)
 
 
-def create_repo(url, headers, github_username):
+def create_repo(repo_name, url, headers, github_username):
     """
     creates a repo with description
     adds README and gitignore
 
-    Args::
-
-    url - the base url
-    headers - authentication headers
-    github_username - github username
+    Args:
+        repo_name - name of the repositiory
+        url - the base url
+        headers - authentication headers
+        github_username - github username
     """
+    
     repo_name = input("Enter repo name: ")
     repo_desc = input("Add repo description: ")
     repo_info = {"name": repo_name, "description": repo_desc}
@@ -44,7 +47,7 @@ def create_repo(url, headers, github_username):
     print(f"==========successfully created {repo_name}==========")
 
 
-def issue_tracker():
+def issue_tracker(issue_status):
     """
     displays issues in select repo
     status:
@@ -52,7 +55,7 @@ def issue_tracker():
         closed - closed issues
         all - displays all issues
     """
-    pass
+    print(f"You passed -i with: {issue_status}")
 
 
 def list_repos():
@@ -67,8 +70,47 @@ def clone_repo():
 
 def handle_args():
     """hadle arguments passed"""
-    pass
+
+    parser = argparse.ArgumentParser(
+            description="""
+            creates repo on github with README && gitignore
+            """)
+    parser.add_argument(
+            "-r",
+            type=str,
+            help=""" Name of the github repositiory """
+            )
+    parser.add_argument(
+            "-i",
+            type=str,
+            help="""
+            get issues using issue status [o - open | c - closed | a - all] 
+            """
+            )
+
+    args = parser.parse_args()
+    
+    issue_options = ["o", "c", "a"]
+    status = args.i
+    repo = args.r
+
+    if repo is None:
+        if status is None:
+            raise parser.error(message="You need to parse arguments")
+        elif status in issue_options:
+            print(f"issues: {status}")
+            issue_tracker(issue_status=status)
+        elif status not in issue_options:
+            print(f"arg [{status}] is not a valid argument\n",
+                    f"\nallowed args: [{issue_options}]")
+    elif repo is not None:
+        create_repo(
+                repo_name=repo,
+                url=base_url,
+                headers=auth_headers,
+                github_username=username
+                )
 
 
 if __name__ == "__main__":
-    create_repo(url=base_url, headers=auth_headers, github_username=username)
+    handle_args()
