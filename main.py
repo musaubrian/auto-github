@@ -28,7 +28,6 @@ def create_repo(repo_name, url, headers, github_username):
         github_username - github username
     """
     
-    repo_name = input("Enter repo name: ")
     repo_desc = input("Add repo description: ")
     repo_info = {"name": repo_name, "description": repo_desc}
     response = requests.post(
@@ -76,12 +75,12 @@ def handle_args():
             creates repo on github with README && gitignore
             """)
     parser.add_argument(
-            "-r",
+            "-r", "--repo",
             type=str,
             help=""" Name of the github repositiory """
             )
     parser.add_argument(
-            "-i",
+            "-i", "--issue",
             type=str,
             help="""
             get issues using issue status [o - open | c - closed | a - all] 
@@ -91,8 +90,8 @@ def handle_args():
     args = parser.parse_args()
     
     issue_options = ["o", "c", "a"]
-    status = args.i
-    repo = args.r
+    status = args.issue
+    repo = args.repo
 
     if repo is None:
         if status is None:
