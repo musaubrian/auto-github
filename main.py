@@ -8,7 +8,6 @@ import argparse
 import subprocess
 import os
 
-
 """global vars"""
 with open("./token", "r") as file:
     token = file.read()
@@ -30,7 +29,7 @@ def create_repo(repo_name, url, headers, github_username):
         headers - authentication headers
         github_username - github username
     """
-    
+
     repo_desc = input("Add repo description: ")
     repo_info = {"name": repo_name, "description": repo_desc}
     response = requests.post(
@@ -52,10 +51,9 @@ def create_repo(repo_name, url, headers, github_username):
 def list_issues(issue_status):
     """
     displays issues in select repo
-    
-    args::
 
-    issuse_status:
+    args::
+    issue_status:
         open - open issues
         closed - closed issues
         all - displays all issues
@@ -71,20 +69,19 @@ def list_issues(issue_status):
             print(issue)
 
 
-
 def clone_repo(repo):
     """
     clones the created repo locally
 
-    args::
+    args:
     repo - name of the repo
     """
-    
     os.chdir("..")
     subprocess.run(
-            ["git","clone",f"https://{token}@github.com/{username}/{repo}"]
+            ["git", "clone", f"https://{token}@github.com/{username}/{repo}"]
             )
     print("\n==========Process complete==========")
+
 
 def handle_args():
     """hadle arguments passed"""
@@ -102,12 +99,12 @@ def handle_args():
             "-i", "--issue",
             type=str,
             help="""
-            get issues using issue status [open | closed | all] 
+            get issues using issue status [open | closed | all]
             """
             )
 
     args = parser.parse_args()
-    
+
     issue_options = ["open", "closed", "all"]
     status = args.issue
     repo = args.repo
@@ -119,8 +116,10 @@ def handle_args():
             print(f"issues status: {status}")
             list_issues(issue_status=status)
         elif status not in issue_options:
-            print(f"arg [{status}] is not a valid argument\n",
-                    f"\nallowed args: [{issue_options}]")
+            print(
+                    f"\narg [{status}] is not a vlid argument\n",
+                    f"\nallowed args: [{issue_options}]"
+                    )
     elif repo is not None:
         create_repo(
                 repo_name=repo,
@@ -129,6 +128,7 @@ def handle_args():
                 github_username=username
                 )
         clone_repo(repo=repo)
+
 
 if __name__ == "__main__":
     handle_args()
