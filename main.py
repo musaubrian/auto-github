@@ -10,9 +10,11 @@ import os
 
 """global vars"""
 with open("./token", "r") as file:
-    token = file.read()
+    username = file.readlines()[0].strip()
 
-username = "musaubrian"
+with open("./token", "r") as file:
+    token = file.readlines()[1].strip()
+
 base_url = "https://api.github.com/user/repos"
 auth_headers = {"Authorization": f"token {token}"}
 g = Github(token)
@@ -62,11 +64,9 @@ def list_issues(issue_status):
     repo_func = g.get_user(username).get_repo(repo_name)
     issues_list = repo_func.get_issues(state=issue_status)
     print()
-    if issues_list is None:
-        print(f"No issues found")
-    else:
-        for issue in issues_list:
-            print(issue)
+
+    for issue in issues_list:
+        print(issue)
 
 
 def clone_repo(repo):
