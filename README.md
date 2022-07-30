@@ -7,15 +7,23 @@ Creates a basic repo with a README and an empty gitignore and clones the repo **
 Clone the repository and install requirements
 
 ```sh
-git clone https://github.com/musaubrian/auto-github
+$ git clone https://github.com/musaubrian/auto-github
+```
+```sh
+$ cd auto-github
 
-cd auto-github
-
-pip install -r requirements.txt
+$ python3 set_env.py
 ```
 
-### setup
-create file `token` with the format:
+------------------
+or you can do it manually
+ - install requirements
+```sh
+$ cd auto-github
+
+$ pip install -r requirements.txt
+```
+ - create file `token` with the format:
 
 ![token-format](https://user-images.githubusercontent.com/94367979/181854680-6593e3d1-e581-4e20-bd74-f5045910a226.png)
 
@@ -66,4 +74,4 @@ Issue(title="add issue tracker", number=1)
 ```
 ## ps
 
-You need an internet connection to use the script
+You need an internet connection for the script to work
