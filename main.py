@@ -119,7 +119,7 @@ def handle_args():
             list_issues(issue_status=status)
         elif status not in issue_options:
             print(
-                    f"\narg [{status}] is not a vlid argument\n",
+                    f"\narg [{status}] is not a valid argument\n",
                     f"\nallowed args: [{issue_options}]"
                     )
     elif repo is not None:
