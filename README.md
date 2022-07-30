@@ -25,11 +25,10 @@ $ cd auto-github
 
 $ pip install -r requirements.txt
 ```
- 2. create file `token` with the format:
+ 2. create file `.gh_config` with the format:
 
-![token-format](https://user-images.githubusercontent.com/94367979/181854680-6593e3d1-e581-4e20-bd74-f5045910a226.png)
+![Ubuntu-20 04 7_30_2022 1_38_16 PM](https://user-images.githubusercontent.com/94367979/181906634-2a96325f-9637-4bb2-bbb3-c7d7499675eb.png)
 
-    
 ## Usage && Examples
 
 ```sh
@@ -77,3 +76,5 @@ Issue(title="add issue tracker", number=1)
 ## ps
 
 You need an internet connection for the script to work
+
+Recommend generating a new personal token with only repo permission
