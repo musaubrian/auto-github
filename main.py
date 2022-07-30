@@ -8,11 +8,13 @@ import argparse
 import subprocess
 import os
 
+
 """global vars"""
-with open("./token", "r") as file:
+
+with open("gh_config", "r") as file:
     username = file.readlines()[0].strip()
 
-with open("./token", "r") as file:
+with open("gh_config", "r") as file:
     token = file.readlines()[1].strip()
 
 base_url = "https://api.github.com/user/repos"
