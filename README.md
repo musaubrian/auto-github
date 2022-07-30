@@ -4,11 +4,12 @@
 Creates a basic repo with a README and an empty gitignore and clones the repo **all in just two lines** or **one** if you'd like
 ## Installation && setup
 
-Clone the repository and install requirements
+Clone the repository
 
 ```sh
 $ git clone https://github.com/musaubrian/auto-github
 ```
+### install requirements
 ```sh
 $ cd auto-github
 
@@ -17,13 +18,14 @@ $ python3 set_env.py
 
 ------------------
 or you can do it manually
+
  - install requirements
 ```sh
 $ cd auto-github
 
 $ pip install -r requirements.txt
 ```
- - create file `token` with the format:
+ 2. create file `token` with the format:
 
 ![token-format](https://user-images.githubusercontent.com/94367979/181854680-6593e3d1-e581-4e20-bd74-f5045910a226.png)
 
