@@ -32,9 +32,9 @@ $ pip install -r requirements.txt
 ## Usage && Examples
 
 ```sh
-$ python3 main.py --help
+$ ./main --help
 
-usage: main.py [-h] [-r REPO] [-i ISSUE]
+usage: main [-h] [-r REPO] [-i ISSUE]
 
 creates repo on github with README && gitignore
 
@@ -49,7 +49,7 @@ optional arguments:
 
 **Repositroy arg (-r | --repo)**
 ```sh
-$ python3 main.py -r repository_name
+$ ./main -r repository_name
 Add repo description: description of the repo
 <Response [201]>
 ========== successfully created repository_name ==========
@@ -66,7 +66,7 @@ Unpacking objects: 100% (6/6), 463 bytes | 33.00 KiB/s, done.
 
 **Issues arg (-i | --issue)**
 ```sh
-$ python3 main.py -i closed
+$ ./main -i closed
 issues status: closed
 Repo to search issues: auto-github
 
