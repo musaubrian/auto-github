@@ -37,18 +37,18 @@ def create_repo(repo_name, url, headers, github_username):
     repo_desc = input("Add repo description: ")
     repo_info = {"name": repo_name, "description": repo_desc}
     response = requests.post(
-            url,
-            headers=headers,
-            data=json.dumps(repo_info)
-            )
+        url,
+        headers=headers,
+        data=json.dumps(repo_info)
+    )
     print(response)
     repo = g.get_user(github_username).get_repo(name=repo_name)
     repo.create_file(
-            ".gitignore", "add gitignore", ""
-            )
+        ".gitignore", "add gitignore", ""
+    )
     repo.create_file(
-            "README.md", "add readme", f"# {repo_name}\n> {repo_desc}"
-            )
+        "README.md", "add readme", f"# {repo_name}\n> {repo_desc}"
+    )
     print(f"========== successfully created {repo_name} ==========\n")
 
 
@@ -80,8 +80,8 @@ def clone_repo(repo):
     """
     os.chdir("..")
     subprocess.run(
-            ["git", "clone", f"https://{token}@github.com/{username}/{repo}"]
-            )
+        ["git", "clone", f"https://{token}@github.com/{username}/{repo}"]
+    )
     print("\n========== Process complete ==========")
 
 
@@ -89,21 +89,21 @@ def handle_args():
     """hadle arguments passed"""
 
     parser = argparse.ArgumentParser(
-            description="""
+        description="""
             creates repo on github with README && gitignore
             """)
     parser.add_argument(
-            "-r", "--repo",
-            type=str,
-            help=""" Name of the github repositiory """
-            )
+        "-r", "--repo",
+        type=str,
+        help=""" Name of the github repositiory """
+    )
     parser.add_argument(
-            "-i", "--issue",
-            type=str,
-            help="""
+        "-i", "--issue",
+        type=str,
+        help="""
             get issues using issue status [open | closed | all]
             """
-            )
+    )
 
     args = parser.parse_args()
 
@@ -119,16 +119,16 @@ def handle_args():
             list_issues(issue_status=status)
         elif status not in issue_options:
             print(
-                    f"\narg [{status}] is not a valid argument\n",
-                    f"\nallowed args: [{issue_options}]"
-                    )
+                f"\narg [{status}] is not a valid argument\n",
+                f"\nallowed args: [{issue_options}]"
+            )
     elif repo is not None:
         create_repo(
-                repo_name=repo,
-                url=base_url,
-                headers=auth_headers,
-                github_username=username
-                )
+            repo_name=repo,
+            url=base_url,
+            headers=auth_headers,
+            github_username=username
+        )
         clone_repo(repo=repo)
 
 
