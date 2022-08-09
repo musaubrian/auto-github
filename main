@@ -131,6 +131,5 @@ def handle_args():
         )
         clone_repo(repo=repo)
 
-
 if __name__ == "__main__":
     handle_args()
