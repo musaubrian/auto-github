@@ -2,6 +2,7 @@
 """script uses github's api to create repos from terminal"""
 
 from github import Github
+from pathlib import Path
 import requests
 import json
 import argparse
@@ -10,11 +11,14 @@ import os
 
 
 """global vars"""
+home_path = Path.home()  
+to_conf = os.path.join(home_path, ".config")  
+full_path = Path(to_conf, ".gh_config")
 
-with open(".gh_config", "r") as file:
+with open(full_path, "r") as file:
     username = file.readlines()[0].strip()
 
-with open(".gh_config", "r") as file:
+with open(full_path, "r") as file:
     token = file.readlines()[1].strip()
 
 base_url = "https://api.github.com/user/repos"
