@@ -1,7 +1,7 @@
 # auto-github
 
 
-Creates a basic repo with a README and an empty gitignore and clones the repo **all in just two lines** or **one** if you'd like
+Creates a basic repo with a **README** and an empty gitignore and clones the repo **all in just two lines** or **one** if you'd like
 ## Installation && setup
 
 Clone the repository
@@ -16,18 +16,7 @@ $ cd auto-github
 $ python3 set_env.py
 ```
 
-------------------
-or you can do it manually
-
- - install requirements
-```sh
-$ cd auto-github
-
-$ pip install -r requirements.txt
-```
- 2. create file `.gh_config` with the format:
-
-![Ubuntu-20 04 7_30_2022 1_38_16 PM](https://user-images.githubusercontent.com/94367979/181906634-2a96325f-9637-4bb2-bbb3-c7d7499675eb.png)
+-------
 
 ## Usage && Examples
 
