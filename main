@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """script uses github's api to create repos from terminal"""
 
+
 from github import Github
 from pathlib import Path
 import requests
@@ -11,8 +12,8 @@ import os
 
 
 """global vars"""
-home_path = Path.home()  
-to_conf = os.path.join(home_path, ".config")  
+home_path = Path.home()
+to_conf = os.path.join(home_path, ".config")
 full_path = Path(to_conf, ".gh_config")
 
 with open(full_path, "r") as file:
@@ -56,19 +57,20 @@ def create_repo(repo_name, url, headers, github_username):
     print(f"========== successfully created {repo_name} ==========\n")
 
 
-def list_issues(issue_status):
+def list_issues(issue_state):
     """
     displays issues in select repo
 
     args::
-    issue_status:
+    issue_state:
         open - open issues
         closed - closed issues
         all - displays all issues
     """
     repo_name = input("Repo to search issues: ")
     repo_func = g.get_user(username).get_repo(repo_name)
-    issues_list = repo_func.get_issues(state=issue_status)
+    issues_list = repo_func.get_issues(state=issue_state
+                                       )
     print()
 
     for issue in issues_list:
@@ -112,20 +114,22 @@ def handle_args():
     args = parser.parse_args()
 
     issue_options = ["open", "closed", "all"]
-    status = args.issue
+    state = args.issue
     repo = args.repo
 
     if repo is None:
-        if status is None:
+        if state is None:
             raise parser.error(message="You need to parse arguments")
-        elif status in issue_options:
-            print(f"issues status: {status}")
-            list_issues(issue_status=status)
-        elif status not in issue_options:
+        elif state in issue_options:
+            print(f"issues status: {state}")
+            list_issues(issue_state=state)
+        elif state not in issue_options:
             print(
-                f"\narg [{status}] is not a valid argument\n",
-                f"\nallowed args: [{issue_options}]"
+                f"\narg [{state}] is not a valid argument\n",
+                f"\nallowed args: {issue_options}"
             )
+        else:
+            raise argparse.ArgumentError
     elif repo is not None:
         create_repo(
             repo_name=repo,
