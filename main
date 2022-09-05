@@ -69,8 +69,7 @@ def list_issues(issue_state):
     """
     repo_name = input("Repo to search issues: ")
     repo_func = g.get_user(username).get_repo(repo_name)
-    issues_list = repo_func.get_issues(state=issue_state
-                                       )
+    issues_list = repo_func.get_issues(state=issue_state)
     print()
 
     for issue in issues_list:
@@ -107,7 +106,7 @@ def handle_args():
         "-i", "--issue",
         type=str,
         help="""
-            get issues using issue status [open | closed | all]
+            get issues using issue state [open | closed | all]
             """
     )
 
@@ -121,7 +120,7 @@ def handle_args():
         if state is None:
             raise parser.error(message="You need to parse arguments")
         elif state in issue_options:
-            print(f"issues status: {state}")
+            print(f"issues state: {state}")
             list_issues(issue_state=state)
         elif state not in issue_options:
             print(
