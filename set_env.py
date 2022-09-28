@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""setsup user `environment`"""
+"""sets-up user `environment`"""
 
 import os
 from pathlib import Path
