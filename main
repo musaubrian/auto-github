@@ -83,7 +83,9 @@ def clone_repo(repo):
     args:
     repo - name of the repo
     """
-    os.chdir("..")
+
+    to_desktop = os.path.join(home_path, "Desktop")
+    os.chdir(to_desktop)
     subprocess.run(
         ["git", "clone", f"https://{token}@github.com/{username}/{repo}"]
     )
