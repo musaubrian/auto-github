@@ -13,7 +13,7 @@ $ git clone https://github.com/musaubrian/auto-github
 ```sh
 $ cd auto-github
 
-$ python3 set_env.py
+$ ./set_env.py
 ```
 
 -------
