@@ -13,7 +13,7 @@ $ git clone https://github.com/musaubrian/auto-github
 ```sh
 $ cd auto-github
 
-$ ./set_env.py
+$ ./setup.py
 ```
 
 -------
@@ -62,8 +62,9 @@ Repo to search issues: auto-github
 Issue(title="clone function", number=2)
 Issue(title="add issue tracker", number=1)
 ```
-## ps
-
-You need an internet connection for the script to work
-
-Recommend generating a new personal token with only repo permission
+----
+> **Note**
+> 
+> Recommend generating a new personal token with only repo permission
+> 
+> You need an internet connection for the script to work
