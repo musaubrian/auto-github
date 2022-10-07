@@ -84,10 +84,11 @@ def clone_repo(repo):
     repo - name of the repo
     """
 
+    alt_repo_name = input("Name to clone as (optional): ")
     to_desktop = os.path.join(home_path, "Desktop")
     os.chdir(to_desktop)
     subprocess.run(
-        ["git", "clone", f"https://{token}@github.com/{username}/{repo}"]
+        ["git", "clone", f"https://{token}@github.com/{username}/{repo}", alt_repo_name]
     )
     print("\n========== Process complete ==========")
 
@@ -130,7 +131,7 @@ def handle_args():
                 f"\nallowed args: {issue_options}"
             )
         else:
-            raise argparse.ArgumentError
+            raise argparse.ArgumentError()
     elif repo is not None:
         create_repo(
             repo_name=repo,
