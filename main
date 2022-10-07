@@ -49,10 +49,10 @@ def create_repo(repo_name, url, headers, github_username):
     print(response)
     repo = g.get_user(github_username).get_repo(name=repo_name)
     repo.create_file(
-        ".gitignore", "add gitignore", ""
+            ".gitignore", "Chore: add gitignore", ""
     )
     repo.create_file(
-        "README.md", "add readme", f"# {repo_name}\n> {repo_desc}"
+            "README.md", "Chore(docs): add readme", f"# {repo_name}\n> {repo_desc}"
     )
     print(f"========== successfully created {repo_name} ==========\n")
 
