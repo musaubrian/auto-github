@@ -52,7 +52,8 @@ def create_repo(repo_name, url, headers, github_username):
             ".gitignore", "Chore: add gitignore", ""
     )
     repo.create_file(
-            "README.md", "Chore(docs): add readme", f"# {repo_name}\n> {repo_desc}"
+            "README.md", "Chore(docs): add readme",
+            f"# {repo_name}\n> {repo_desc}"
     )
     print(f"========== successfully created {repo_name} ==========\n")
 
@@ -92,7 +93,11 @@ def clone_repo(repo):
     to_desktop = os.path.join(home_path, "Desktop")
     os.chdir(to_desktop)
     subprocess.run(
-        ["git", "clone", f"https://{token}@github.com/{username}/{repo}", alt_repo_name]
+        [
+            "git", "clone",
+            f"https://{token}@github.com/{username}/{repo}",
+            alt_repo_name
+        ]
     )
     print("\n========== Process complete ==========")
 
