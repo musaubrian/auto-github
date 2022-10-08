@@ -84,7 +84,11 @@ def clone_repo(repo):
     repo - name of the repo
     """
 
-    alt_repo_name = input("Name to clone as (optional): ")
+    alt_repo_name = input("Clone repo as? (optional): ")
+
+    if len(alt_repo_name) < 1:
+        alt_repo_name = repo
+
     to_desktop = os.path.join(home_path, "Desktop")
     os.chdir(to_desktop)
     subprocess.run(
