@@ -21,9 +21,11 @@ $ ./setup.py
 ## Usage && Examples
 
 ```sh
-$ ./main --help
+$ ./main.py --help
+or
+$ python3 main.py --help
 
-usage: main [-h] [-r REPO] [-i ISSUE]
+usage: main.py [-h] [-r REPO] [-i ISSUE]
 
 creates repo on github with README && gitignore
 
@@ -38,7 +40,7 @@ optional arguments:
 
 **Repositroy arg (-r | --repo)**
 ```sh
-$ ./main -r repository_name
+$ ./main.py -r repository_name
 Add repo description: description of the repo
 <Response [201]>
 ========== successfully created repository_name ==========
@@ -55,7 +57,7 @@ Unpacking objects: 100% (6/6), 463 bytes | 33.00 KiB/s, done.
 
 **Issues arg (-i | --issue)**
 ```sh
-$ ./main -i closed
+$ ./main.py -i closed
 issues status: closed
 Repo to search issues: auto-github
 
