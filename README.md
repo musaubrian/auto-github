@@ -4,6 +4,13 @@
 Creates a basic repo with a **README** and an empty gitignore and clones the repo **all in just two lines** or **one** if you'd like
 ## Installation && setup
 
+> **Note**
+> 
+> Recommend generating a new personal token with only repo permission
+> 
+> You need an internet connection for the script to work
+---
+
 Clone the repository
 
 ```sh
@@ -64,9 +71,3 @@ Repo to search issues: auto-github
 Issue(title="clone function", number=2)
 Issue(title="add issue tracker", number=1)
 ```
-----
-> **Note**
-> 
-> Recommend generating a new personal token with only repo permission
-> 
-> You need an internet connection for the script to work
