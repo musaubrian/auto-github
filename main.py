@@ -95,7 +95,7 @@ def clone_repo(repo):
     subprocess.run(
         [
             "git", "clone",
-            f"https://{token}@github.com/{username}/{repo}",
+            f"git@github.com:{username}/{repo}",
             alt_repo_name
         ]
     )
