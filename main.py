@@ -41,19 +41,12 @@ def create_repo(repo_name, url, headers, github_username):
 
     repo_desc = input("Add repo description: ")
     repo_info = {"name": repo_name, "description": repo_desc}
-    response = requests.post(
-        url,
-        headers=headers,
-        data=json.dumps(repo_info)
-    )
+    response = requests.post(url, headers=headers, data=json.dumps(repo_info))
     print(response)
     repo = g.get_user(github_username).get_repo(name=repo_name)
+    repo.create_file(".gitignore", "Chore: add gitignore", "")
     repo.create_file(
-            ".gitignore", "Chore: add gitignore", ""
-    )
-    repo.create_file(
-            "README.md", "Chore(docs): add readme",
-            f"# {repo_name}\n> {repo_desc}"
+        "README.md", "Chore(docs): add readme", f"# {repo_name}\n> {repo_desc}"
     )
     print(f"========== successfully created {repo_name} ==========\n")
 
@@ -73,8 +66,11 @@ def list_issues(issue_state):
     issues_list = repo_func.get_issues(state=issue_state)
     print()
 
-    for issue in issues_list:
-        print(issue)
+    if issues_list.totalCount == 0:
+        print(f"No issues of the state [{issue_state}]", f" in [{repo_name}] found")
+    else:
+        for issue in issues_list:
+            print(issue)
 
 
 def clone_repo(repo):
@@ -92,13 +88,7 @@ def clone_repo(repo):
 
     to_desktop = os.path.join(home_path, "Desktop")
     os.chdir(to_desktop)
-    subprocess.run(
-        [
-            "git", "clone",
-            f"git@github.com:{username}/{repo}",
-            alt_repo_name
-        ]
-    )
+    subprocess.run(["git", "clone", f"git@github.com:{username}/{repo}", alt_repo_name])
     print("\n========== Process complete ==========")
 
 
@@ -108,18 +98,18 @@ def handle_args():
     parser = argparse.ArgumentParser(
         description="""
             creates repo on github with README && gitignore
-            """)
-    parser.add_argument(
-        "-r", "--repo",
-        type=str,
-        help=""" Name of the github repositiory """
+            """
     )
     parser.add_argument(
-        "-i", "--issue",
+        "-r", "--repo", type=str, help=""" Name of the github repositiory """
+    )
+    parser.add_argument(
+        "-i",
+        "--issue",
         type=str,
         help="""
             get issues using issue state [open | closed | all]
-            """
+            """,
     )
 
     args = parser.parse_args()
@@ -137,16 +127,13 @@ def handle_args():
         elif state not in issue_options:
             print(
                 f"\narg [{state}] is not a valid argument\n",
-                f"\nallowed args: {issue_options}"
+                f"\nallowed args: {issue_options}",
             )
         else:
             raise argparse.ArgumentError()
     elif repo is not None:
         create_repo(
-            repo_name=repo,
-            url=base_url,
-            headers=auth_headers,
-            github_username=username
+            repo_name=repo, url=base_url, headers=auth_headers, github_username=username
         )
         clone_repo(repo=repo)
 

@@ -24,7 +24,7 @@ def set_env():
     else:
         raise FileExistsError("File already exists")
 
-    print("\n", "="*50, "\n")
+    print("\n", "=" * 50, "\n")
     subprocess.run(["pip", "install", "-r", "requirements.txt"])
     print("================Everything is set====================")
 
