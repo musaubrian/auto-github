@@ -39,6 +39,10 @@ $ ./setup.py
 
 ## Usage && Examples
 
+![demo](./demo.gif)
+
+
+
 ```sh
 $ ./main.py --help
 or
