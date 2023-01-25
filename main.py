@@ -67,7 +67,7 @@ def list_issues(issue_state):
     print()
 
     if issues_list.totalCount == 0:
-        print(f"No issues of the state [{issue_state}]", f" in [{repo_name}] found")
+        print(f"No issues of the state [{issue_state}]", f"in [{repo_name}] found")
     else:
         for issue in issues_list:
             print(issue)
