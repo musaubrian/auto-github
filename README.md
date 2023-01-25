@@ -1,7 +1,17 @@
-# auto-github
+# Auto-Github
 
 
 Creates a basic repo with a **README** and an empty gitignore and clones the repo **all in just two lines** or **one** if you'd like
+
+## Why
+Wanted github's cli features but not *all* of the features.
+
+
+So I did the next best thing, *spent hours researching how to to do it so that I can do it in 30sec*
+
+Now you can too
+
+
 ## Installation && setup
 
 > **Note**
