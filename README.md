@@ -9,6 +9,8 @@ Wanted github's cli features but not *all* of the features.
 
 So I did the next best thing, *spent hours researching how to to do it so that I can do it in 30sec*
 
+![eyes](https://user-images.githubusercontent.com/94367979/214549804-ed99872e-4f03-4a97-a507-4d888f92b8de.gif)
+
 Now you can too
 
 
