@@ -22,6 +22,9 @@ with open(full_path, "r") as file:
 with open(full_path, "r") as file:
     token = file.readlines()[1].strip()
 
+with open(full_path, "r") as file:
+    clone_option = file.readlines()[2].strip()
+
 base_url = "https://api.github.com/user/repos"
 auth_headers = {"Authorization": f"token {token}"}
 g = Github(token)
@@ -56,8 +59,8 @@ def list_issues(issue_state):
     displays issues in select repo
 
     args::
-    issue_state:
-        open - open issues
+        issue_state:
+            open - open issues
         closed - closed issues
         all - displays all issues
     """
@@ -78,7 +81,7 @@ def clone_repo(repo):
     clones the created repo locally
 
     args:
-    repo - name of the repo
+        repo - name of the repo
     """
 
     alt_repo_name = input("Clone repo as? (optional): ")
@@ -88,8 +91,23 @@ def clone_repo(repo):
 
     to_desktop = os.path.join(home_path, "Desktop")
     os.chdir(to_desktop)
-    subprocess.run(["git", "clone", f"git@github.com:{username}/{repo}", alt_repo_name])
-    print("\n========== Process complete ==========")
+    if clone_option == "ssh":
+        subprocess.run(
+            ["git", "clone", f"git@github.com:{username}/{repo}", alt_repo_name]
+        )
+        print("\n========== Process complete ==========")
+    elif clone_option == "https":
+        subprocess.run(
+            [
+                "git",
+                "clone",
+                f"https://{token}@github.com:{username}/{repo}",
+                alt_repo_name,
+            ]
+        )
+        print("\n========== Process complete ==========")
+    else:
+        print(f"option {clone_option} is not valid")
 
 
 def handle_args():

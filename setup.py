@@ -19,8 +19,19 @@ def set_env():
     if full_path.exists() is False:
         gh_username = input("Github username: ")
         gh_token = input("Github token: ")
+        clone_option = input("Use ssh or https: (https | ssh)\n")
+        if clone_option == "ssh":
+            print("""
+-----------------------------------------------------------------------------
+                    You will need to setup the ssh keys
+                            learn more here ⬇️
+
+    https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+
+-----------------------------------------------------------------------------
+                  """)
         with open(full_path, "w") as file:
-            file.write(f"{gh_username}\n{gh_token}")
+            file.write(f"{gh_username}\n{gh_token}\n{clone_option}")
     else:
         raise FileExistsError("File already exists")
 
