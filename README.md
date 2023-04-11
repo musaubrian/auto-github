@@ -1,7 +1,8 @@
 # Auto-Github
 
 
-Creates a basic repo with a **README** and an empty gitignore and clones the repo **all in just two lines** or **one** if you'd like
+Creates a repo with a **README** and clones the repo **all in just two lines** or **one** if you'd like
+The README is pre-filled with the Repo title and description
 
 ## Why
 Wanted github's cli features but not *all* of the features.
@@ -26,13 +27,13 @@ Now you can too
 Clone the repository
 
 ```sh
-$ git clone https://github.com/musaubrian/auto-github
+ git clone https://github.com/musaubrian/auto-github
 ```
 ### install requirements
 ```sh
-$ cd auto-github
+ cd auto-github
 
-$ ./setup.py
+ ./setup.py
 ```
 
 -------
@@ -44,9 +45,9 @@ $ ./setup.py
 
 
 ```sh
-$ ./main.py --help
+ ./main.py --help
 or
-$ python3 main.py --help
+ python3 main.py --help
 
 usage: main.py [-h] [-r REPO] [-i ISSUE]
 
@@ -63,8 +64,10 @@ optional arguments:
 
 **Repositroy arg (-r | --repo)**
 ```sh
-$ ./main.py -r repository_name
+ ./main.py -r repository_name
 Add repo description: description of the repo
+Make it private (y/n)? y
+
 <Response [201]>
 ========== successfully created repository_name ==========
 
@@ -80,7 +83,7 @@ Unpacking objects: 100% (6/6), 463 bytes | 33.00 KiB/s, done.
 
 **Issues arg (-i | --issue)**
 ```sh
-$ ./main.py -i closed
+ ./main.py -i closed
 issues status: closed
 Repo to search issues: auto-github
 

@@ -2,13 +2,14 @@
 """script uses github's api to create repos from terminal"""
 
 
-from github import Github
-from pathlib import Path
-import requests
-import json
 import argparse
-import subprocess
+import json
 import os
+from pathlib import Path
+import subprocess
+
+from github import Github
+import requests
 
 
 """global vars"""
@@ -30,11 +31,16 @@ auth_headers = {"Authorization": f"token {token}"}
 g = Github(token)
 
 
-def create_repo(repo_name, url, headers, github_username):
+def create_repo(
+        repo_name: str,
+        url: str,
+        headers: dict[str, str],
+        github_username: str
+        ):
     """
     creates a repo with description
     adds README and gitignore
-
+    ---
     Args:
         repo_name - name of the repositiory
         url - the base url
@@ -43,13 +49,31 @@ def create_repo(repo_name, url, headers, github_username):
     """
 
     repo_desc = input("Add repo description: ")
-    repo_info = {"name": repo_name, "description": repo_desc}
+    private_or_public = input("Make it private(y/n)? ")
+    make_private = None
+    if private_or_public == "y":
+        make_private = True
+    elif private_or_public == "n":
+        make_private = False
+    else:
+        print(
+            f"Choice {private_or_public} not y or n\
+                \nSo we made it public by default"
+        )
+        make_private = False
+
+    repo_info = {
+            "name": repo_name,
+            "description": repo_desc,
+            "private": make_private
+            }
     response = requests.post(url, headers=headers, data=json.dumps(repo_info))
     print(response)
     repo = g.get_user(github_username).get_repo(name=repo_name)
-    repo.create_file(".gitignore", "Chore: add gitignore", "")
     repo.create_file(
-        "README.md", "Chore(docs): add readme", f"# {repo_name}\n> {repo_desc}"
+            "README.md",
+            "chore: initial commit",
+            f"# {repo_name}\n> {repo_desc}"
     )
     print(f"========== successfully created {repo_name} ==========\n")
 
@@ -57,10 +81,10 @@ def create_repo(repo_name, url, headers, github_username):
 def list_issues(issue_state):
     """
     displays issues in select repo
-
+    ---
     args::
         issue_state:
-            open - open issues
+        open - open issues
         closed - closed issues
         all - displays all issues
     """
@@ -70,7 +94,10 @@ def list_issues(issue_state):
     print()
 
     if issues_list.totalCount == 0:
-        print(f"No issues of the state [{issue_state}]", f"in [{repo_name}] found")
+        print(
+                f"No issues of the state [{issue_state}]",
+                f"in [{repo_name}] found"
+            )
     else:
         for issue in issues_list:
             print(issue)
@@ -93,7 +120,12 @@ def clone_repo(repo):
     os.chdir(to_desktop)
     if clone_option == "ssh":
         subprocess.run(
-            ["git", "clone", f"git@github.com:{username}/{repo}", alt_repo_name]
+            [
+                "git",
+                "clone",
+                f"git@github.com:{username}/{repo}",
+                alt_repo_name
+            ]
         )
         print("\n========== Process complete ==========")
     elif clone_option == "https":
@@ -119,7 +151,10 @@ def handle_args():
             """
     )
     parser.add_argument(
-        "-r", "--repo", type=str, help=""" Name of the github repositiory """
+        "-r",
+        "--repo",
+        type=str,
+        help=""" Name of the github repositiory """
     )
     parser.add_argument(
         "-i",
@@ -148,10 +183,16 @@ def handle_args():
                 f"\nallowed args: {issue_options}",
             )
         else:
-            raise argparse.ArgumentError()
+            raise argparse.ArgumentError(
+                    argument=state,
+                    message="You need to parse arguments"
+            )
     elif repo is not None:
         create_repo(
-            repo_name=repo, url=base_url, headers=auth_headers, github_username=username
+            repo_name=repo,
+            url=base_url,
+            headers=auth_headers,
+            github_username=username
         )
         clone_repo(repo=repo)
 
