@@ -116,8 +116,8 @@ def clone_repo(repo):
     if len(alt_repo_name) < 1:
         alt_repo_name = repo
 
-    to_desktop = os.path.join(home_path, "Desktop")
-    os.chdir(to_desktop)
+    to_personal = os.path.join(home_path, "personal")
+    os.chdir(to_personal)
     if clone_option == "ssh":
         subprocess.run(
             [
