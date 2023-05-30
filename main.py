@@ -49,17 +49,9 @@ def create_repo(
     """
 
     repo_desc = input("Add repo description: ")
-    private_or_public = input("Make it private(y/n)? ")
-    make_private = None
-    if private_or_public == "y":
-        make_private = True
-    elif private_or_public == "n":
-        make_private = False
-    else:
-        print(
-            f"Choice {private_or_public} not y or n\
-                \nSo we made it public by default"
-        )
+    private_or_public = input("Make it private([Y]/n)? ")
+    make_private = True
+    if private_or_public == "n":
         make_private = False
 
     repo_info = {
@@ -67,8 +59,9 @@ def create_repo(
             "description": repo_desc,
             "private": make_private
             }
-    response = requests.post(url, headers=headers, data=json.dumps(repo_info))
-    print(response)
+
+    requests.post(url, headers=headers, data=json.dumps(repo_info))
+
     repo = g.get_user(github_username).get_repo(name=repo_name)
     repo.create_file(
             "README.md",
@@ -147,7 +140,7 @@ def handle_args():
 
     parser = argparse.ArgumentParser(
         description="""
-            creates repo on github with README && gitignore
+            creates a repo on github with README
             """
     )
     parser.add_argument(
@@ -173,7 +166,7 @@ def handle_args():
 
     if repo is None:
         if state is None:
-            raise parser.error(message="You need to parse arguments")
+            raise parser.error(message="You need to parse in arguments")
         elif state in issue_options:
             print(f"issues state: {state}")
             list_issues(issue_state=state)
